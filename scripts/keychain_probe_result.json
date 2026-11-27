@@ -1,0 +1,103 @@
+{
+ "when": "2026-11-25 17:10:51 KST",
+ "security": "/usr/bin/security",
+ "run": "a8317f25",
+ "item_service_prefix": "hermes-secure-input-test-",
+ "tmp_service_prefix": "hermes-secure-input.tmp.",
+ "securityagent_processes_before": 0,
+ "default_keychain_is_login": true,
+ "before": {
+  "dump_rc": 0,
+  "counts": {
+   "hermes-secure-input-test-": 0,
+   "hermes-secure-input.tmp.": 0
+  }
+ },
+ "new_item": {
+  "preflight": {
+   "available": true,
+   "reason": null,
+   "exists": false
+  },
+  "preflight_calls": 2,
+  "preflight_secs": 0.023,
+  "save": {
+   "saved": true,
+   "replaced": false,
+   "error": null,
+   "service": "hermes-secure-input-test-a8317f25",
+   "account": "hermes-secure-input",
+   "listed": false,
+   "new_item": true,
+   "tmp_left": false,
+   "main_touched": true
+  },
+  "save_calls": 3,
+  "save_secs": 0.11
+ },
+ "replace_existing": {
+  "preflight": {
+   "available": true,
+   "reason": null,
+   "exists": true
+  },
+  "preflight_calls": 3,
+  "preflight_secs": 0.278,
+  "save": {
+   "saved": true,
+   "replaced": true,
+   "error": null,
+   "service": "hermes-secure-input-test-a8317f25",
+   "account": "hermes-secure-input",
+   "listed": false,
+   "new_item": false,
+   "tmp_left": false,
+   "main_touched": true
+  },
+  "save_calls": 7,
+  "save_secs": 0.486
+ },
+ "acl_read_with_path": {
+  "command": "security dump-keychain -a <default keychain path>",
+  "secs": [
+   0.249,
+   0.241,
+   0.234,
+   0.233,
+   0.228
+  ],
+  "rc": [
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "max_secs": 0.249,
+  "over_2_5s": false,
+  "fake_item_present": true
+ },
+ "cleanup": {
+  "delete_item_rc": 0,
+  "delete_tmp_rc": 44
+ },
+ "after": {
+  "dump_rc": 0,
+  "counts": {
+   "hermes-secure-input-test-": 0,
+   "hermes-secure-input.tmp.": 0
+  }
+ },
+ "securityagent_processes_after": 0,
+ "checks": {
+  "new_item_saved": true,
+  "new_item_save_calls_is_3": true,
+  "existing_preflight_available": true,
+  "existing_saved": true,
+  "existing_save_calls_is_7": true,
+  "acl_read_max_under_2_5s": true,
+  "test_prefix_items_after_is_0": true,
+  "tmp_prefix_items_after_is_0": true,
+  "no_new_securityagent": true
+ }
+}

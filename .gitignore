@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+.DS_Store
+*.log
+.env
+.pytest_cache/
+ui/node_modules/
+ui/dist/
+ui/test-results/
+ui/playwright-report/
+ui/captures/

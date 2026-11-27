@@ -1,0 +1,142 @@
+{
+  "A": {
+    "kind": "api_key",
+    "purpose": "Exa 웹 검색 도구를 쓰려면 API 키가 필요합니다",
+    "label": "Exa API 키",
+    "requester": { "type": "agent", "profile": "default" },
+    "target": {
+      "profile": "default",
+      "profiles": ["default", "worker", "sage"],
+      "profile_editable": true,
+      "env_var": "EXA_API_KEY",
+      "origin": null,
+      "site": null,
+      "stores": [
+        { "store": "env", "selected": true, "fixed": false, "by": "default", "reason": null, "needed": false,
+          "scope": "profile", "ident": "EXA_API_KEY", "available": true, "unavailable_reason": null, "exists": false },
+        { "store": "keychain", "selected": false, "fixed": false, "by": null, "reason": null, "needed": false,
+          "scope": "mac", "ident": "hermes-secure-input.exa-api-key", "available": true, "unavailable_reason": null, "exists": false }
+      ],
+      "keychain": { "id": "exa-api-key", "service": "hermes-secure-input.exa-api-key", "account": "hermes-secure-input",
+                    "listed": false, "new_item": true, "label": null, "used_by": null }
+    }
+  },
+  "A2": {
+    "kind": "api_key",
+    "purpose": "Hermes가 도는 컴퓨터의 검색 스크립트와 Hermes가 같은 Exa API 키를 써야 합니다",
+    "label": "Exa API 키",
+    "requester": { "type": "agent", "profile": "default" },
+    "target": {
+      "profile": "default",
+      "profiles": ["default", "worker", "sage"],
+      "profile_editable": true,
+      "env_var": "EXA_API_KEY",
+      "origin": null,
+      "site": null,
+      "stores": [
+        { "store": "env", "selected": true, "fixed": false, "by": "history", "reason": null, "needed": false,
+          "scope": "profile", "ident": "EXA_API_KEY", "available": true, "unavailable_reason": null, "exists": true },
+        { "store": "keychain", "selected": true, "fixed": false, "by": "agent",
+          "reason": "검색 스크립트는 이 키를 Mac 키체인에서 읽습니다", "needed": true,
+          "scope": "mac", "ident": "hermes-secure-input.exa-api-key", "available": true, "unavailable_reason": null, "exists": true }
+      ],
+      "keychain": { "id": "exa-api-key", "service": "hermes-secure-input.exa-api-key", "account": "hermes-secure-input",
+                    "listed": false, "new_item": false, "label": null, "used_by": null }
+    }
+  },
+  "B": {
+    "kind": "login",
+    "purpose": "쇼핑몰 관리자 페이지를 점검하려면 로그인 정보가 필요합니다",
+    "label": "예시 쇼핑몰 관리자",
+    "requester": { "type": "agent", "profile": "worker" },
+    "target": {
+      "profile": "worker",
+      "profiles": ["default", "worker", "sage"],
+      "profile_editable": true,
+      "env_var": null,
+      "origin": "https://admin.example.com",
+      "site": null,
+      "stores": [
+        { "store": "hermes_vault", "selected": true, "fixed": true, "by": "default", "reason": null, "needed": false,
+          "scope": "profile", "ident": "https://admin.example.com", "available": true, "unavailable_reason": null, "exists": null }
+      ]
+    }
+  },
+  "C": {
+    "kind": "otp_code",
+    "purpose": "accounts.example.com 로그인 도중 사이트가 일회용 코드를 요구했습니다",
+    "label": "accounts.example.com 일회용 코드",
+    "requester": { "type": "agent", "profile": "default" },
+    "target": {
+      "profile": "default",
+      "profiles": ["default"],
+      "profile_editable": false,
+      "env_var": null,
+      "origin": null,
+      "site": "accounts.example.com",
+      "stores": []
+    }
+  },
+  "D": {
+    "kind": "secret",
+    "purpose": "Example Vault가 잠겼을 때 Hermes가 스스로 열려면 이 비밀번호가 필요합니다",
+    "label": "Example Vault 비밀번호",
+    "requester": { "type": "agent", "profile": "default" },
+    "target": {
+      "profile": "default",
+      "profiles": ["default", "worker", "sage"],
+      "profile_editable": true,
+      "env_var": null,
+      "origin": null,
+      "site": null,
+      "stores": [
+        { "store": "keychain", "selected": true, "fixed": true, "by": "agent",
+          "reason": "잠금 해제 스크립트는 이 값을 Mac 키체인에서만 읽습니다", "needed": true,
+          "scope": "mac", "ident": "example-unlock-item", "available": true, "unavailable_reason": null, "exists": true }
+      ],
+      "keychain": { "id": "example-vault-password", "service": "example-unlock-item", "account": "example-unlock-item",
+                    "listed": true, "new_item": false, "label": "Example Vault 비밀번호", "used_by": "Example Vault 자동 잠금 해제 스크립트" }
+    }
+  },
+  "D2": {
+    "kind": "secret",
+    "purpose": "백업 스크립트가 암호화 묶음을 풀려면 이 비밀번호가 필요합니다",
+    "label": "백업 묶음 비밀번호",
+    "requester": { "type": "agent", "profile": "default" },
+    "target": {
+      "profile": "default",
+      "profiles": ["default", "worker", "sage"],
+      "profile_editable": true,
+      "env_var": null,
+      "origin": null,
+      "site": null,
+      "stores": [
+        { "store": "keychain", "selected": true, "fixed": true, "by": "default", "reason": null, "needed": false,
+          "scope": "mac", "ident": "hermes-secure-input.backup-archive", "available": true, "unavailable_reason": null, "exists": false }
+      ],
+      "keychain": { "id": "backup-archive", "service": "hermes-secure-input.backup-archive", "account": "hermes-secure-input",
+                    "listed": false, "new_item": true, "label": null, "used_by": null }
+    }
+  },
+  "D3": {
+    "kind": "secret",
+    "purpose": "배포 스크립트가 서명 키를 풀려면 이 비밀번호가 필요합니다",
+    "label": "배포 서명 키 비밀번호",
+    "requester": { "type": "agent", "profile": "default" },
+    "target": {
+      "profile": "default",
+      "profiles": ["default", "worker", "sage"],
+      "profile_editable": true,
+      "env_var": null,
+      "origin": null,
+      "site": null,
+      "stores": [
+        { "store": "keychain", "selected": true, "fixed": true, "by": "agent",
+          "reason": "배포 스크립트는 이 값을 Mac 키체인에서만 읽습니다", "needed": true,
+          "scope": "mac", "ident": "deploy-signing", "available": true, "unavailable_reason": null, "exists": false }
+      ],
+      "keychain": { "id": "deploy-signing", "service": "deploy-signing", "account": "deploy",
+                    "listed": true, "new_item": false, "label": "배포 서명 키 비밀번호", "used_by": "배포 스크립트" }
+    }
+  }
+}

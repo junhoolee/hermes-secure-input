@@ -1,0 +1,182 @@
+/* Scan only src/ for class names, so edits to tests never change the shipped CSS. */
+@import "tailwindcss" source(".");
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Dark mode follows the phone setting; there is no in-page toggle. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+/*
+ * "Security envelope" palette. The tinted crosshatch is the inside of a
+ * confidential paper envelope; the white sheet is the window you write on.
+ *   ground  #E4E9F2   envelope paper          ink     #0F1B33   text
+ *   tint    #C7D1E4   crosshatch lines        muted   #46536E   secondary text
+ *   sheet   #FFFFFF   the writing surface     route   #2647A8   path, actions
+ *   seal    #A3241B   errors, last minute     done    #1D6B45   saved
+ */
+:root {
+  --ground: #e4e9f2;
+  --tint: #c7d1e4;
+  --sheet: #ffffff;
+  --ink: #0f1b33;
+  --ink-muted: #46536e;
+  --route: #2647a8;
+  --route-strong: #1a3584;
+  --route-soft: #e3e9f8;
+  --seal: #a3241b;
+  --seal-soft: #fbeceb;
+  --done: #1d6b45;
+  --done-soft: #e5f3ec;
+  --line: #c3ccdc;
+
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card: var(--sheet);
+  --card-foreground: var(--ink);
+  --popover: var(--sheet);
+  --popover-foreground: var(--ink);
+  --primary: var(--route);
+  --primary-foreground: #ffffff;
+  --secondary: var(--route-soft);
+  --secondary-foreground: var(--ink);
+  --muted: #eef1f7;
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--route-soft);
+  --accent-foreground: var(--ink);
+  --destructive: var(--seal);
+  --border: var(--line);
+  --input: #8d99b2;
+  --ring: var(--route);
+  --radius: 0.375rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #0c1322;
+    --tint: #18233c;
+    --sheet: #131c30;
+    --ink: #e6ebf5;
+    --ink-muted: #a9b4ca;
+    --route: #93aeff;
+    --route-strong: #bccbff;
+    --route-soft: #1d2a4a;
+    --seal: #ff9c90;
+    --seal-soft: #3a1a1a;
+    --done: #84d6a8;
+    --done-soft: #12301f;
+    --line: #2a3654;
+
+    --primary-foreground: #0c1322;
+    --muted: #19233a;
+    --input: #5b6884;
+  }
+}
+
+@theme inline {
+  --font-sans: system-ui, -apple-system, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Malgun Gothic",
+    sans-serif;
+  --font-heading: var(--font-sans);
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type scale, ratio ~1.25 from a 17px body (iOS reading size; inputs stay >= 16px).
+     Tailwind's own size names are reused so class merging (cn) treats them as sizes. */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.45;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.55;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+  --text-xl: 1.3125rem;
+  --text-xl--line-height: 1.4;
+  --text-3xl: 1.75rem;
+  --text-3xl--line-height: 1.25;
+
+  --color-ground: var(--ground);
+  --color-tint: var(--tint);
+  --color-sheet: var(--sheet);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-route: var(--route);
+  --color-route-strong: var(--route-strong);
+  --color-route-soft: var(--route-soft);
+  --color-seal: var(--seal);
+  --color-seal-soft: var(--seal-soft);
+  --color-done: var(--done);
+  --color-done-soft: var(--done-soft);
+  --color-line: var(--line);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+    /* No double-tap zoom delay on buttons; pinch zoom stays allowed. */
+    touch-action: manipulation;
+    /* Taps flash the route colour faintly instead of the default grey box. */
+    -webkit-tap-highlight-color: rgb(38 71 168 / 0.15);
+  }
+  /* Mouse and trackpad only: no rubber-band or swipe-back that would leave this one-time page.
+     Touch devices keep their defaults. */
+  @media (pointer: fine) {
+    html {
+      overscroll-behavior: none;
+    }
+  }
+  body {
+    @apply bg-background text-foreground text-base;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* The envelope interior: two fine diagonal line sets, drawn in CSS (no image request). */
+@utility envelope-tint {
+    background-color: var(--ground);
+    background-image:
+      repeating-linear-gradient(45deg, var(--tint) 0 1px, transparent 1px 7px),
+      repeating-linear-gradient(-45deg, var(--tint) 0 1px, transparent 1px 7px);
+}
+
+/* Literal names the user must recognise: env var, site address, profile. */
+@utility ident {
+    font-family: var(--font-mono);
+    overflow-wrap: anywhere;
+    word-break: break-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

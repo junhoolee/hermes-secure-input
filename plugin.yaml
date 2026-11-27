@@ -1,0 +1,10 @@
+name: secure-input
+version: 0.1.0
+description: "Collects credentials (API keys, website logins, macOS Keychain passwords, login one-time codes) on a one-time input page served over Tailscale Serve instead of Slack, and saves them to the Hermes vault, a profile .env, or the macOS Keychain. Slack only gets a link button, the store and Keychain item names, and the result."
+author: "junhoolee"
+kind: standalone
+provides_tools:
+  - secure_input_request
+  - secure_input_enter_code
+provides_hooks:
+  - pre_tool_call
